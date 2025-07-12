@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vot-front
+  namespace: vote
+  labels: 
+    app: vot-front
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vot-front
+  template:
+    metadata:
+      name: vot-front
+      labels:
+        app: vot-front
+    spec:
+      containers:
+      - name: votfront
+        image: docker/example-voting-app-vote
+        ports:
+          - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: 0.1
+          limits:
+            memory: "128Mi"
+            cpu: 0.3
+

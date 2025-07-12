@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-vote
+  namespace: vote
+  labels: 
+    app: worker-vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker-vote
+  template:
+    metadata:
+      name: worker-vote
+      labels:
+        app: worker-vote
+    spec:
+      containers:
+      - name: worker-vote
+        image: docker/example-voting-app-worker
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: 0.2
+          limits:
+            memory: "256Mi"
+            cpu: 0.5
+
